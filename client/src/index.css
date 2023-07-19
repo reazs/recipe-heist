@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;500&family=Merriweather:wght@700;900&family=Offside&family=Quicksand:wght@300;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cookie&family=Roboto:wght@700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.big-heading {
+  font-size: calc(2vw + 2.5rem);
+}
+
+.cursive-font {
+  font-family: "Montserrat";
+  font-weight: normal;
+  line-height: 0.5;
+}
+.medium-heading {
+  font-family: "Josefin Sans";
+  font-weight: 500;
+  font-size: calc(1.5rem + 1.5vw);
+}
+
+@media (max-width: 500px) {
+  .big-heading {
+    font-size: calc(2vw + 1.5rem);
+  }
+}
+
+@media (max-width: 380px) {
+  .big-heading {
+    font-size: calc(2vw + 0.8rem);
+  }
+}
