@@ -6,7 +6,6 @@ import carrots from "../../assets/images/carrots.png";
 import lettus from "../../assets/images/lettus.png";
 import noodels from "../../assets/icons/noodles-icon.png";
 import dessert from "../../assets/icons/dessert-icon.png";
-import salads from "../../assets/images/salad.jpeg";
 import "./HomePage.css";
 
 import {
