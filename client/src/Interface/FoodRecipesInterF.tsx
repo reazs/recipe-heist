@@ -7,6 +7,7 @@ export interface FoodRecipeInterF {
   img_url: string;
   nutrition: Nutrition;
   food_stats: FoodStats;
+  Description: string;
 }
 export interface Nutrition {
   kcal: string;

@@ -143,7 +143,7 @@ export default function Example() {
         <Route path="/" element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/contact" element={<ContactPage />} />
-        <Route path="/recipe-details" element={<RecipeDetailsPage />} />
+        <Route path="/recipe-details/:title" element={<RecipeDetailsPage />} />
       </Routes>
     </>
   );

@@ -5,7 +5,7 @@ const recipes = require("../models/recipes");
 
 route.get("/", async (re, res) => {
   try {
-    return res.json(recipes.slice(0, 5));
+    return res.json(recipes);
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -28,6 +28,23 @@ route.post("/recipe-by-type", async (req, res) => {
     }
   } catch (error) {
     return res.status(500).json({ message: "server error", error: error });
+  }
+});
+
+//  get recipe by name
+
+route.post("/recipe-by-name", async (req, res) => {
+  const name = req.body.name;
+
+  try {
+    const recipe = recipes.find((recipe) => recipe.Name === name);
+    if (recipe) {
+      return res.status(200).json(recipe);
+    } else {
+      return res.status(404).json({ message: "cannot not find that recipe" });
+    }
+  } catch (e) {
+    return res.status(500).json({ message: "server error", error: e });
   }
 });
 
