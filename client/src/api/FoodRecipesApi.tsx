@@ -52,4 +52,17 @@ export class FoodService {
       console.error(error);
     }
   };
+  static getRecipes = async () => {
+    try {
+      const response = await fetch(BASE_URL + "/recipes", { method: "GET" });
+      if (response.status === 200) {
+        const responseData: FoodRecipesType = await response.json();
+        return responseData;
+      } else {
+        console.log("could not load recipes api");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 }

@@ -11,6 +11,7 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from "../pages/HomePage/HomePage";
 import ContactPage from "../pages/ContactPage/ContactPage";
 import RecipeDetailsPage from "../pages/RecipeDetailsPage/RecipeDetailsPage";
+import RecipesPage from "../pages/RecipesPage/RecipesPage";
 
 export default function Example() {
   const [openNav, setOpenNav] = React.useState(false);
@@ -40,8 +41,8 @@ export default function Example() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
-          Account
+        <a href="/recipes" className="flex items-center">
+          Recipes
         </a>
       </Typography>
       <Typography
@@ -50,8 +51,8 @@ export default function Example() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
-          Blocks
+        <a href="/contact" className="flex items-center">
+          Contact
         </a>
       </Typography>
       <Typography
@@ -60,8 +61,8 @@ export default function Example() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
-          Docs
+        <a href="/about" className="flex items-center">
+          About
         </a>
       </Typography>
     </ul>
@@ -85,7 +86,7 @@ export default function Example() {
               size="sm"
               className="hidden lg:inline-block text-black"
             >
-              <span>Buy Now</span>
+              <span>Sign In</span>
             </Button>
             <IconButton
               variant="text"
@@ -144,6 +145,7 @@ export default function Example() {
         <Route path="/home" element={<HomePage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/recipe-details/:title" element={<RecipeDetailsPage />} />
+        <Route path="/recipes" element={<RecipesPage />} />
       </Routes>
     </>
   );

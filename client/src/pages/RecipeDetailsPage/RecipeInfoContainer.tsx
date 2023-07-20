@@ -17,7 +17,10 @@ const RecipeInfoContainer = ({
     <div className="sm:flex sm:flex-row grid grid-cols-1 gap-5 mx-5">
       {/* left container */}
       <div className="mx-auto   sm:w-[70%] ">
-        <img src={img_url} className="w-full h-full rounded-lg object-cover" />
+        <img
+          src={img_url}
+          className="w-full h-full rounded-lg object-cover shadow-md"
+        />
       </div>
       {/* right container */}
       <div className="w-full flex flex-col justify-center ">
