@@ -76,10 +76,13 @@ export default function Example() {
         <div className="flex items-center justify-between text-blue-gray-900">
           <Typography
             as="a"
-            href="#"
+            href="/"
             className="mr-4 cursor-pointer py-1.5 font-medium"
           >
-            Food Heist
+            <p className="text-2xl font-['Montserrat'] tracking-tighter">
+              <span className="text-teal-500">Recipe</span>{" "}
+              <span className="text-red-400">Heist</span>
+            </p>
           </Typography>
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
