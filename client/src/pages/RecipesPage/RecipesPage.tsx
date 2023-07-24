@@ -4,13 +4,13 @@ import LoadinIndicator from "../../components/LoadingIndicator";
 import Utils from "../../utils/Utils";
 import { FoodRecipesType } from "../../Interface/FoodRecipesInterF";
 import { FoodService } from "../../api/FoodRecipesApi";
-import HomeSaladCard from "../HomePage/components/HomeSaladCard";
+import RecipeCard from "../HomePage/components/RecipeCard";
 
 const RecipesPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [recipes, setRecipes] = useState<FoodRecipesType>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(15);
+  const [itemsPerPage] = useState(12);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = recipes?.slice(indexOfFirstItem, indexOfLastItem);
@@ -40,22 +40,32 @@ const RecipesPage: React.FC = () => {
               <h4 className=" mb-5 text-2xl font-bold font-['Merriweather'] text-gray-400">
                 Recipes
               </h4>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-2">
                 {recipes &&
                   currentItems.map((recipe, index) => {
                     return (
-                      <HomeSaladCard
+                      <RecipeCard
                         key={recipe.Name + index}
                         imgUrl={recipe.img_url}
                         title={recipe.Name}
                         cookingTime={recipe.food_stats.cook_time}
                         calories={recipe.nutrition.kcal}
+                        author={recipe.Author}
                       />
                     );
                   })}
               </div>
             </div>
             <div className="mt-10 flex flex-row justify-center">
+              <i
+                onClick={() => {
+                  if (currentPage > 11) {
+                    window.scrollTo(0, 500);
+                    setCurrentPage(currentPage - 10);
+                  }
+                }}
+                className="fa-solid fa-angles-left mr-2 text-white p-2 bg-primary-color hover:bg-[#33c9db] cursor-pointer"
+              ></i>
               <i
                 onClick={() => {
                   if (currentPage > 1) {
@@ -76,6 +86,15 @@ const RecipesPage: React.FC = () => {
                   }
                 }}
                 className="fa-solid fa-angle-right text-white p-2 bg-primary-color hover:bg-[#33c9db] cursor-pointer"
+              ></i>
+              <i
+                onClick={() => {
+                  if (currentPage + 10 <= totalPage) {
+                    window.scrollTo(0, 500);
+                    setCurrentPage(currentPage + 10);
+                  }
+                }}
+                className="fa-solid fa-angles-right ml-2 text-white p-2 bg-primary-color hover:bg-[#33c9db] cursor-pointer"
               ></i>
             </div>
             {/* extra space */}

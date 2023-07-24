@@ -6,12 +6,14 @@ const RecipeInfoContainer = ({
   calories,
   cookTime,
   img_url,
+  Author,
 }: {
   img_url: string;
   Name: string;
   Description: string;
   calories: string;
   cookTime: string;
+  Author: string;
 }) => {
   return (
     <div className="sm:flex sm:flex-row grid grid-cols-1 gap-5 mx-5">
@@ -43,7 +45,8 @@ const RecipeInfoContainer = ({
         </div>
         {/* contain */}
         <p className="mt-2">
-          <strong>Contain: </strong>Barley, Eggs, Milk, Sulphites, Wheat
+          <strong>Author: </strong>
+          {Author}
         </p>
       </div>
     </div>

@@ -34,10 +34,12 @@ route.post("/recipe-by-type", async (req, res) => {
 //  get recipe by name
 
 route.post("/recipe-by-name", async (req, res) => {
-  const name = req.body.name;
-
+  const { name, author } = req.body;
   try {
-    const recipe = recipes.find((recipe) => recipe.Name === name);
+    //  small bugs name are not unique so find other way to update this
+    const recipe = recipes.find(
+      (recipe) => recipe.Name === name && recipe.Author === author
+    );
     if (recipe) {
       return res.status(200).json(recipe);
     } else {
@@ -45,6 +47,25 @@ route.post("/recipe-by-name", async (req, res) => {
     }
   } catch (e) {
     return res.status(500).json({ message: "server error", error: e });
+  }
+});
+
+route.post("/search", async (req, res) => {
+  const query = req.body.query;
+  try {
+    const lowerCaseQuery = query.toLowerCase();
+    const filteredRecipes = recipes.filter((recipe) => {
+      const { Name, Description, Author, Ingredients, Method } = recipe;
+      if (
+        Name.toLowerCase().includes(lowerCaseQuery) ||
+        Method.some((step) => step.toLowerCase().includes(lowerCaseQuery))
+      ) {
+        return recipe;
+      }
+    });
+    return res.status(200).json(filteredRecipes);
+  } catch (error) {
+    return res.status(500).json({ message: "server error", error: error });
   }
 });
 

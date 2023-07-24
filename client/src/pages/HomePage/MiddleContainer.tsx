@@ -12,12 +12,14 @@ import {
   CategoriesInterF,
   categoryInterF,
 } from "../../Interface/HomePageInterF";
-import HomeSaladCard from "./components/HomeSaladCard";
+import RecipeCard from "./components/RecipeCard";
 import { FoodService } from "../../api/FoodRecipesApi";
 import {
   FoodRecipeInterF,
   FoodRecipesType,
 } from "../../Interface/FoodRecipesInterF";
+import Footer from "../../components/Footer";
+
 const MiddleContainer: React.FC = () => {
   const [selectedFood, setSelectedFood] = useState("salad");
   const [selectedRecipes, setSelectedRecipes] = useState<FoodRecipesType>([]);
@@ -43,72 +45,73 @@ const MiddleContainer: React.FC = () => {
     handleUpdateSelectedFood();
   }, [selectedFood, selectedIndex]);
   return (
-    <div className="h-[500px] w-full py-12 lg:px-32   ">
-      {/* leading labels of middle container */}
-      <div className="flex flex-row justify-between h-[80px]">
-        <div className="flex flex-row">
-          <img src={tomato} />
-          <img className=" rotate-45 relative right-4 top-4" src={lettus} />
+    <div>
+      <div className=" w-full py-12 lg:px-32   ">
+        {/* leading labels of middle container */}
+        <div className="flex flex-row justify-between h-[80px]">
+          <div className="flex flex-row">
+            <img src={tomato} />
+            <img className=" rotate-45 relative right-4 top-4" src={lettus} />
+          </div>
+          <img src={carrots} />
         </div>
-        <img src={carrots} />
-      </div>
-      <div className="flex flex-row justify-between">
-        <h1 className="medium-heading text-red-400">Recipes</h1>
-        <div className="">
-          <p className="text-black p-2 border rounded-md">
-            Sorted By
-            <select className="text-center ml-1">
-              <option value={"newest"}>Newest</option>
-              <option value={"rating"}>Rating</option>
-              <option value={"prepartion time"}>Preparation Time</option>
-            </select>
-          </p>
+        <div className="flex flex-row justify-between">
+          <h1 className="medium-heading text-red-400">Recipes</h1>
+          <div className="">
+            <p className="text-black p-2 border rounded-md">
+              Sorted By
+              <select className="text-center ml-1">
+                <option value={"newest"}>Newest</option>
+                <option value={"rating"}>Rating</option>
+                <option value={"prepartion time"}>Preparation Time</option>
+              </select>
+            </p>
+          </div>
         </div>
-      </div>
 
-      <div className="lg:flex lg:flex-row  items-center">
-        {/* category div */}
-        <div className="flex lg:flex-col flex-row lg:overflow-visible overflow-x-auto">
-          {categories.map((category: categoryInterF, index: number) => {
-            return (
-              <div
-                onClick={() => {
-                  setSelectedIndex(index);
-                }}
-                key={category.title + index}
-                id="category-tile"
-                className={
-                  selectedIndex == index
-                    ? " flex flex-row justify-start items-center min-w-[200px] mb-5 py-2 px-5 border-2 bg-[#435B66] cursor-pointer text-white   rounded-full"
-                    : "flex flex-row justify-start items-center min-w-[200px] mb-5 py-2 px-5 border-2 hover:bg-[#435B66] hover:bg-opacity-80 cursor-pointer hover:text-white bg-white text-black rounded-full"
-                }
-              >
-                <img
-                  src={category.icon}
-                  className="h-[40px]  w-[45px] mr-5 bg-[#435B66] rounded-md"
-                />
-                <p className="text-xl">{category.title}</p>
-              </div>
-            );
-          })}
-        </div>
-        <div className="md:ml-5  w-[95%] mx-auto  p-4 grid md:grid-cols-3 sm:grid-cols-2 gap-2">
-          {selectedRecipes &&
-            selectedRecipes.map((typeRecipe, index) => {
+        <div className="lg:flex lg:flex-row  items-center">
+          {/* category div */}
+          <div className="flex lg:flex-col flex-row lg:overflow-visible overflow-x-auto">
+            {categories.map((category: categoryInterF, index: number) => {
               return (
-                <HomeSaladCard
-                  key={+index}
-                  imgUrl={typeRecipe.img_url}
-                  title={typeRecipe.Name}
-                  calories={typeRecipe.nutrition.kcal}
-                  cookingTime={typeRecipe.food_stats.cook_time}
-                />
+                <div
+                  onClick={() => {
+                    setSelectedIndex(index);
+                  }}
+                  key={category.title + index}
+                  id="category-tile"
+                  className={
+                    selectedIndex == index
+                      ? " flex flex-row justify-start items-center min-w-[200px] mb-5 py-2 px-5 border-2 bg-[#435B66] cursor-pointer text-white   rounded-full"
+                      : "flex flex-row justify-start items-center min-w-[200px] mb-5 py-2 px-5 border-2 hover:bg-[#435B66] hover:bg-opacity-80 cursor-pointer hover:text-white bg-white text-black rounded-full"
+                  }
+                >
+                  <img
+                    src={category.icon}
+                    className="h-[40px]  w-[45px] mr-5 bg-[#435B66] rounded-md"
+                  />
+                  <p className="text-xl">{category.title}</p>
+                </div>
               );
             })}
+          </div>
+          <div className="md:ml-5  w-[95%] mx-auto  p-4 grid md:grid-cols-3 sm:grid-cols-2 gap-2">
+            {selectedRecipes &&
+              selectedRecipes.map((typeRecipe, index) => {
+                return (
+                  <RecipeCard
+                    key={+index}
+                    imgUrl={typeRecipe.img_url}
+                    title={typeRecipe.Name}
+                    calories={typeRecipe.nutrition.kcal}
+                    cookingTime={typeRecipe.food_stats.cook_time}
+                    author={typeRecipe.Author}
+                  />
+                );
+              })}
+          </div>
         </div>
       </div>
-      {/* extra space */}
-      <div className="h-[200px]"></div>
     </div>
   );
 };

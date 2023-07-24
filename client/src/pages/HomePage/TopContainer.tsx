@@ -10,9 +10,12 @@ import stakeVegetables from "../../assets/images/stakea-vegetables.jpeg";
 import arrowRightUpIcon from "../../assets/icons/arrow-right-up.png";
 import lemon from "../../assets/images/lemon.png";
 import lemonade from "../../assets/images/lemonade.png";
+import { useNavigate } from "react-router-dom";
 const TopContainer: React.FC = () => {
   const [inputFocus, setInputFocus] = useState(false);
   const [starHover, setStarHover] = useState(false);
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
   useEffect(() => {
     const searchContainer = document.getElementById(
       "search-container"
@@ -53,6 +56,10 @@ const TopContainer: React.FC = () => {
                     onFocus={() => {
                       setInputFocus(!inputFocus);
                     }}
+                    onChange={(event) => {
+                      const { value } = event.target;
+                      setQuery(value);
+                    }}
                     onBlur={() => {
                       setInputFocus(!inputFocus);
                     }}
@@ -65,7 +72,12 @@ const TopContainer: React.FC = () => {
                     }}
                     className="h-[40px] w-[45px] flex flex-row justify-center cursor-pointer items-center text-white rounded-full"
                   >
-                    <i className="fa-solid fa-magnifying-glass text-2xl"></i>
+                    <i
+                      onClick={() => {
+                        navigate("/search/" + query);
+                      }}
+                      className="fa-solid fa-magnifying-glass text-2xl"
+                    ></i>
                   </div>
                 </div>
                 <div className="flex flex-row  items-end border-b-4">
@@ -118,7 +130,7 @@ const TopContainer: React.FC = () => {
                           <p className="lg:text-xl overflow-hidden line-clamp-2 sm:text-sm text-xs font-['Josefin Sans']">
                             Show Top Rated Recipes
                           </p>
-                          <Link to="">
+                          <Link to="/recipes">
                             <img
                               className="h-[30px] w-[30px] ml-2 inline-block p-2 bg-white rounded-full"
                               src={arrowRightUpIcon}

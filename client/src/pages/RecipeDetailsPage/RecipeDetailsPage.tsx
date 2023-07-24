@@ -10,7 +10,7 @@ import Utils from "../../utils/Utils";
 import LoadinIndicator from "../../components/LoadingIndicator";
 const RecipeDetailsPage: React.FC = () => {
   const [activeBtn, setActiveBtn] = useState("ingredient");
-  const { title } = useParams();
+  const { title, author } = useParams();
   const [recipe, setRecipe] = useState<FoodRecipeInterF>();
   const [isLoading, setIsLoading] = useState(true);
   console.log(title);
@@ -19,7 +19,7 @@ const RecipeDetailsPage: React.FC = () => {
     setIsLoading(false);
   };
   const loadRecipeData = () => {
-    FoodService.getRecipeDetails(title as string).then((data) => {
+    FoodService.getRecipeDetails(title as string, author as string).then((data) => {
       setRecipe(data);
     });
   };

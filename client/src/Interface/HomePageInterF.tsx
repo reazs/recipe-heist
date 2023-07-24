@@ -9,4 +9,5 @@ export interface HomeSaladCardInterF {
   title: string;
   calories: string | number;
   cookingTime: string;
+  author: string
 }

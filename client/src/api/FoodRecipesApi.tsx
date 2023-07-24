@@ -3,6 +3,7 @@ import {
   FoodRecipesType,
 } from "../Interface/FoodRecipesInterF";
 import { BASE_URL, URL_RECIPES_TYPE } from "../constant";
+import Utils from "../utils/Utils";
 
 export class FoodService {
   static getFoodByType = async (name: string) => {
@@ -33,7 +34,7 @@ export class FoodService {
     }
   };
 
-  static getRecipeDetails = async (name: string) => {
+  static getRecipeDetails = async (name: string, author: string) => {
     try {
       const response = await fetch(BASE_URL + "/recipes/recipe-by-name", {
         method: "POST",
@@ -42,6 +43,7 @@ export class FoodService {
         },
         body: JSON.stringify({
           name: name,
+          author: author,
         }),
       });
       if (response.status === 200) {
@@ -57,12 +59,37 @@ export class FoodService {
       const response = await fetch(BASE_URL + "/recipes", { method: "GET" });
       if (response.status === 200) {
         const responseData: FoodRecipesType = await response.json();
-        return responseData;
+        return responseData.reverse();
       } else {
         console.log("could not load recipes api");
       }
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  static getQueryRecipes = async (query: string) => {
+    try {
+      const response = await fetch(BASE_URL + "/recipes/search", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          query: query,
+        }),
+      });
+      if (response.status === 200) {
+        const responseData: FoodRecipesType = await response.json();
+        return responseData;
+      } else if (response.status === 500) {
+        console.log("server error");
+        console.error(response);
+      } else if (response.status === 404) {
+        console.log("item not found");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 }

@@ -12,6 +12,8 @@ import HomePage from "../pages/HomePage/HomePage";
 import ContactPage from "../pages/ContactPage/ContactPage";
 import RecipeDetailsPage from "../pages/RecipeDetailsPage/RecipeDetailsPage";
 import RecipesPage from "../pages/RecipesPage/RecipesPage";
+import SearchPage from "../pages/SearchPage/SearchPage";
+import AboutPage from "../pages/AboutPage/AboutPage";
 
 export default function Example() {
   const [openNav, setOpenNav] = React.useState(false);
@@ -51,8 +53,8 @@ export default function Example() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="/contact" className="flex items-center">
-          Contact
+        <a href="/about" className="flex items-center">
+          About
         </a>
       </Typography>
       <Typography
@@ -61,8 +63,8 @@ export default function Example() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="/about" className="flex items-center">
-          About
+        <a href="/contact" className="flex items-center">
+          Contact
         </a>
       </Typography>
     </ul>
@@ -81,13 +83,13 @@ export default function Example() {
           </Typography>
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
-            <Button
+            {/* <Button
               variant="gradient"
               size="sm"
               className="hidden lg:inline-block text-black"
             >
               <span>Sign In</span>
-            </Button>
+            </Button> */}
             <IconButton
               variant="text"
               className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
@@ -129,14 +131,14 @@ export default function Example() {
         </div>
         <MobileNav open={openNav}>
           {navList}
-          <Button
+          {/* <Button
             variant="gradient"
             size="sm"
             fullWidth
             className="mb-2  text-black"
           >
             <span>Buy Now</span>
-          </Button>
+          </Button> */}
         </MobileNav>
       </Navbar>
 
@@ -144,8 +146,13 @@ export default function Example() {
         <Route path="/" element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/contact" element={<ContactPage />} />
-        <Route path="/recipe-details/:title" element={<RecipeDetailsPage />} />
+        <Route
+          path="/recipe-details/:title/:author"
+          element={<RecipeDetailsPage />}
+        />
         <Route path="/recipes" element={<RecipesPage />} />
+        <Route path="/search/:query" element={<SearchPage />} />
+        <Route path="/about" element={<AboutPage />} />
       </Routes>
     </>
   );
